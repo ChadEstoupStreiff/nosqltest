@@ -1,0 +1,48 @@
+@startuml db_uml
+skinparam backgroundColor #1e1e1e
+skinparam classBackgroundColor #2e2e2e
+skinparam classBorderColor #555555
+skinparam classArrowColor #ffffff
+skinparam classFontColor #ffffff
+skinparam defaultFontColor #ffffff
+
+class User {
+    id : varchar
+    email : varchar
+    hashed_password : varchar
+    full_name : varchar
+    role : varchar
+
+    get_user_by_id() : User
+    create_user() : User
+}
+
+class Product {
+    id : varchar
+    name : varchar
+    price : float
+    description : varchar
+    image : varchar
+
+    get_product_by_id() : Product
+    create_product() : Product
+}
+
+class Purchase {
+    id : varchar
+    user_id : varchar
+    product_id : varchar
+    quantity : int
+    total_price : float
+
+    get_purchase_by_id() : Purchase
+    create_purchase() : Purchase
+}
+
+User "follows" o--o "followers" User
+
+User "buyer" --o "purchases" Purchase
+
+Product "product" --o "sold" Purchase
+
+@enduml

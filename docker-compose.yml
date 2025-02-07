@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   mariadb:
+    env_file:
+      - .env
     image: mariadb:latest
     container_name: mariadb
     environment:
@@ -13,11 +15,41 @@ services:
       - "${SQL_PORT}:3306"
     volumes:
       - ${SQL_DATA_PATH}:/var/lib/mysql
+    networks:
+      - temp-network
+    hostname: mariadb
 
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
+  phpmyadmin:
+    env_file:
+      - .env
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: ${SQL_ROOT_PWD}
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
     ports:
-      - "${NOSQL_PORT}:27017"
+      - "${PMA_PORT}:80"
+    networks:
+      - temp-network
+
+  neo4j:
+    env_file:
+      - .env
+    image: neo4j:latest
+    container_name: neo4j
+    ports:
+      - "${NOSQL_PORT}:7687"
+    environment:
+      NEO4J_AUTH: neo4j/${NOSQL_PWD}
     volumes:
       - ${NOSQL_DATA_PATH}:/data/db
+    networks:
+      - temp-network
+    hostname: neo4j
+
+networks:
+  temp-network:
+    driver: bridge

@@ -5,5 +5,5 @@ Nous allons définir trois collections :
 	•	products : Gère les produits disponibles.  
 	•	purchases : Gère les achats effectués par les utilisateurs.  
 
-2. SQL Tests
-3. NoSQL Tests
+2. Init databases:
+**Make sure to have docker, docker-compose, python and pypi installed**
