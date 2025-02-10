@@ -50,6 +50,21 @@ services:
       - temp-network
     hostname: neo4j
 
+  app:
+    build:
+      context: ./app
+    container_name: app
+    ports:
+      - "${APP_PORT}:8501"
+    volumes:
+      - ".env:/.env"
+      - "./app/src:/app"
+    networks:
+      - temp-network
+    depends_on:
+      - mariadb
+      - neo4j
+
 networks:
   temp-network:
     driver: bridge

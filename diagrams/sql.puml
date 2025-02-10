@@ -1,0 +1,40 @@
+@startuml
+
+entity User {
+    *id: VARCHAR(255) [PK]
+    --
+    email: VARCHAR(255)
+    hashed_password: VARCHAR(255)
+    full_name: VARCHAR(255)
+    role: VARCHAR(255)
+}
+
+entity Product {
+    *id: VARCHAR(255) [PK]
+    --
+    name: VARCHAR(255)
+    price: REAL
+    description: TEXT
+    image: TEXT
+}
+
+entity Purchase {
+    *id: VARCHAR(255) [PK]
+    --
+    user_id: VARCHAR(255) [FK]
+    product_id: VARCHAR(255) [FK]
+    quantity: INTEGER
+    total_price: REAL
+}
+
+entity Follows {
+    *follower_id: VARCHAR(255) [PK, FK]
+    *followee_id: VARCHAR(255) [PK, FK]
+}
+
+User --o Purchase: "user_id"
+Product --o Purchase: "product_id"
+User --o Follows: "follower_id"
+User --o Follows: "followee_id"
+
+@enduml
