@@ -12,6 +12,8 @@ with st.spinner("Connecting to databases"):
 
 
 with st.sidebar:
+    min_relations = 0
+    min_purchases = 0
     request_type = st.selectbox(
         "Select type of request", ["Activity", "Relation", "Follows", "Purchases", "Products", "Users",]
     )

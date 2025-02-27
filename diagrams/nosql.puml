@@ -1,0 +1,36 @@
+@startuml
+
+entity User {
+    *id: STRING [PK]
+    --
+    email: STRING
+    hashed_password: STRING
+    full_name: STRING
+    role: STRING
+}
+
+entity Product {
+    *id: STRING [PK]
+    --
+    name: STRING
+    price: FLOAT
+    description: STRING
+    image: STRING
+}
+
+entity Purchase {
+    *id: STRING [PK]
+    --
+    quantity: INTEGER
+    total_price: FLOAT
+}
+
+User -[hidden]-> Product
+User -[hidden]-> Purchase
+
+User "1" --o "0..*" Purchase : "MADE"
+Product "1" --o "0..*" Purchase : "CONTAINS"
+
+User "0..*" --o "0..*" User : "FOLLOWS"
+
+@enduml
