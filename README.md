@@ -1,4 +1,5 @@
 # **Github link: https://github.com/ChadEstoupStreiff/nosqltest** 
+Chad Estoup--Streiff, Elouan Lahellec
 # SQL vs NoSQL
 This project aims to time request with same objectives between a sql database (mariadb) and a nosql database (neo4j).  
 
